@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             // $table->unsignedBigInteger('message_id');
             $table->text('commentaire');
-            $table->string('image');
+            $table->string('image')->nullable();
             // $table->unsignedBigInteger('user_id');
             $table->string('tags');
             $table->timestamps();

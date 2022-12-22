@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('/users', App\Http\Controllers\UserController::class);
+Route::resource('/comments', App\Http\Controllers\CommentController::class);
+Route::resource('/messages', App\Http\Controllers\MessageController::class);
+
+Route::get('/messages/search', [App\Http\Controllers\MessageController::class, 'search'])->name('messages.search');
