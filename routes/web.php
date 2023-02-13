@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,9 @@ Route::resource('/comments', App\Http\Controllers\CommentController::class);
 Route::resource('/messages', App\Http\Controllers\MessageController::class);
 
 Route::get('/messages/search', [App\Http\Controllers\MessageController::class, 'search'])->name('messages.search');
+Route::get('/users/moncompte/{user}', [App\Http\Controllers\UserController::class, 'monCompte'])->name('users.moncompte');
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
