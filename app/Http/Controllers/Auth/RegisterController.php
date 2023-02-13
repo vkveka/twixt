@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -53,13 +52,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'pseudo' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'confirmed', 
-            Password::min(8)
-            ->mixedCase()
-            ->numbers()
-            ->symbols()
-            ->letters()
-            ->uncompromised()]
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image' => ['required', 'string', 'max:40'],
         ]);
     }
 
@@ -73,6 +67,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'pseudo' => $data['pseudo'],
+            'image' => $data['image'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
