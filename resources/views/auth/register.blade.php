@@ -34,7 +34,7 @@
                                 <div class="col-md-6">
                                     <input id="image" type="text"
                                         class="form-control @error('image') is-invalid @enderror" name="image"
-                                        value="{{ old('image') }}" required autocomplete="image" autofocus>
+                                        value="user.jpg" required autocomplete="image" autofocus>
 
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
