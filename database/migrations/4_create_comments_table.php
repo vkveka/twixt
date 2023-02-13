@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->text('message');
-            // $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('message_id');
+            $table->text('content');
             $table->string('image')->nullable();
+            // $table->unsignedBigInteger('user_id');
             $table->string('tags');
             $table->timestamps();
 
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            //$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('comments');
     }
 };

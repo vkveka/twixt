@@ -45,13 +45,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role() {
+    //nom au singulier car un user n'a qu'un seul rôle
+    //cradinlité 1,1
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
-    public function comments() {
+
+    //nom au pluriel car un user peut poster  plusieurs commentaires
+    //cardinalité 0,n
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
-    public function messages() {
-        return $this->hasMany(Message::class);
+
+    //nom au pluriel car un user peut poster plusieurs posts
+    //cardinalité 0,n
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role_id == 2;
     }
 }

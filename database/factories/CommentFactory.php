@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use App\Models\Message;
+use App\Models\Post;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -19,11 +19,11 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'commentaire' => fake()->paragraph(),
-            // 'image' => fake()->image(),
-            'tags' => fake()->words(3, true),
-            'message_id' => rand(1, Message::count()),
-            'user_id' => rand(1, User::count())
+            'post_id' => rand(1, Post::count()),
+            'content' => $this->faker->paragraph(),
+            'user_id' => rand(1, User::count()),
+            'image' => 'default_picture_' . rand(1,5) . '.jpg',
+            'tags' => $this->faker->words(3, true),            
         ];
     }
 }
