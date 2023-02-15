@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -45,15 +46,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user) //Valide le formulaire de modification --POST--
+
+    //Valide le formulaire de modification --POST--
+    public function update(Request $request, User $user)
     {
         $request->validate([
-            'pseudo' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
+            'pseudo' => ['required', 'string', 'max:40'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'image' => ['nullable', 'string', 'max:40']
         ]);
+
+        // on modifie les infos de l'ulisateur
         $user->pseudo = $request->input('pseudo');
-        $user->email = $request->input('email');
+        // $user->email = $request->input('email');
+        $user->image = $request->input('image');
+
+        // ons auvegarde les changements en bdd
         $user->save();
+
+        // on redirige vers la page précédente
         return redirect()->route('users.moncompte', $user)->with('message', 'Le compte a bien été modifié');
     }
 
@@ -63,8 +74,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) //Suppression de compte
+    public function destroy(User $user) //Suppression de compte
     {
-        //
+        // On vérifie que c'est bien le user connecté qui fait le demande de suppression
+        // les id doivent être identiques
+        if (Auth::user()->id == $user->id) {
+            // on réalise la suppression
+            $user->delete();
+            return redirect()->route('register')->with('message', 'le compte a bien été supprimé');
+        } else {
+            return redirect()->back()->withErrors(['erreur' => 'suppression du compte impossible']);
+        }
     }
 }

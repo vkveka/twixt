@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 
-class MessageController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
         //
+        return view('home', ['post' => $user]);
     }
 
     /**
@@ -24,6 +26,7 @@ class MessageController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -43,9 +46,10 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
+        return view('home', ['post' => $user]);
     }
 
     /**

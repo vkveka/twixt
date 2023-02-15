@@ -14,22 +14,18 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::resource('/users', App\Http\Controllers\UserController::class);
+
+Route::resource('/users', App\Http\Controllers\UserController::class)->except('index', 'create', 'store');
 Route::resource('/comments', App\Http\Controllers\CommentController::class);
-Route::resource('/messages', App\Http\Controllers\MessageController::class);
+Route::resource('/posts', App\Http\Controllers\PostController::class);
 
-Route::get('/messages/search', [App\Http\Controllers\MessageController::class, 'search'])->name('messages.search');
+Route::get('/posts/search', [App\Http\Controllers\PostController::class, 'search'])->name('posts.search');
 Route::get('/users/moncompte/{user}', [App\Http\Controllers\UserController::class, 'monCompte'])->name('users.moncompte');
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index')->middleware('guest');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home')->middleware('auth');

@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        
+    ];
+
+
+
     // je charge automatiquement l'utilisateur à chaque fois que je récupère un message
     protected $with = ['user'];
 
