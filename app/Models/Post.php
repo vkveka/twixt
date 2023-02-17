@@ -10,13 +10,15 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        
+        'user_id',
+        'content',
+        'tags',
+        'image',
     ];
 
-
-
     // je charge automatiquement l'utilisateur à chaque fois que je récupère un message
-    protected $with = ['user'];
+    // EAGER LOADING automatique
+    protected $with = ['user', 'comments'];
 
     //nom de la fonction au pluriel car 1 seul message peut regrouper plusieurs commentaires
     // cardinalité 0,n

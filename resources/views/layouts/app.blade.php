@@ -14,17 +14,21 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    {{-- FontAwesome --}}
+    <script src="https://kit.fontawesome.com/a6ce60fee1.js" crossorigin="anonymous"></script>
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body>
+<body style="background-color: rgba(100, 170, 100, 0.467)">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: rgba(100, 170, 100, 0.76)">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                <img src="./public/images/twixt_logo.png" alt="">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -34,7 +38,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <form action="{{ route('search') }}" method="get">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <input type="search" name="search" id="recherche" class="form-control"
+                                        placeholder="Rechercher...">
+                                </div>
+                                <div class="col-md-1 my-auto">
+                                    <button type="submit" class="btn"><i class="fa-solid fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
